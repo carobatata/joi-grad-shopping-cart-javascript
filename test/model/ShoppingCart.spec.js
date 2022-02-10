@@ -36,6 +36,28 @@ describe("Shopping cart should checkout", () => {
         expect(order.totalPrice).toBe(100);
         expect(order.loyaltyPoints).toBe(20);
     });
+
+    it("Should create an order with the total price, loyaltyPoints and products", () => {
+        const customer = new Customer("Test customer");
+        const products = [new Product(100, "TestProduct", "Test product")];
+        const shoppingCart = new ShoppingCart(customer, products);
+
+        const order = shoppingCart.checkout();
+
+        expect(order.totalPrice).toBe(100);
+        expect(order.loyaltyPoints).toBe(20);
+        expect(order.products).toEqual(products)
+    })
+
+    it("Should empty the shoppingCart", () => {
+        const customer = new Customer("Test customer");
+        const products = [new Product(100, "TestProduct", "Test product")];
+        const shoppingCart = new ShoppingCart(customer, products);
+
+        shoppingCart.checkout();
+
+        expect(shoppingCart.products).toEqual([]);
+    })
 });
 
 describe("Shopping cart should modify products", () => {

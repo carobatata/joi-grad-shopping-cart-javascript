@@ -22,7 +22,10 @@ export default class ShoppingCart {
         let totalPrice = new DiscountService(this.products).applyDiscounts();
         let loyaltyPointsEarned = new LoyaltyPointsService(this.products).applyLoyaltyPointsService();
 
-        return new Order(totalPrice, loyaltyPointsEarned);
+        let order = new Order(totalPrice, loyaltyPointsEarned, this.products);
+
+        this.products = [];
+        return order;
     };
 
     displaySummary = () =>  {
