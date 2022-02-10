@@ -58,6 +58,14 @@ describe("Shopping cart should checkout", () => {
 
         expect(shoppingCart.products).toEqual([]);
     })
+    it("Should not create an order if shoppingCart is empty", () => {
+        const customer = new Customer("Test customer");
+        const shoppingCart = new ShoppingCart(customer, []);
+
+        const order = shoppingCart.checkout();;
+
+        expect(order).toBeUndefined();
+    })
 });
 
 describe("Shopping cart should modify products", () => {

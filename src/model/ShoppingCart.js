@@ -19,6 +19,8 @@ export default class ShoppingCart {
 
     checkout = () => {
 
+        if(this.products.length === 0) return;
+
         let totalPrice = new DiscountService(this.products).applyDiscounts();
         let loyaltyPointsEarned = new LoyaltyPointsService(this.products).applyLoyaltyPointsService();
 
