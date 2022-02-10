@@ -5,6 +5,7 @@ export default class Customer {
         this.name = name;
         this.orders = [];
         this.shoppingCart = new ShoppingCart(this, []);
+        this.loyaltyPoints = 0;
 
     };
 
@@ -18,6 +19,7 @@ export default class Customer {
 
     checkoutCart = () => {
         let order = this.shoppingCart.checkout();
+        this.loyaltyPoints += order.loyaltyPoints;
         this.orders.push(order);
     } 
 };
