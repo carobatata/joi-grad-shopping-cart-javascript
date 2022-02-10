@@ -1,6 +1,7 @@
 import _ from "lodash";
 import DiscountService from "../service/DiscountService.js";
 import Order from "./Order.js";
+import LoyaltyPointsService from "../service/LoyaltyPointsService.js";
 
 export default class ShoppingCart {
     constructor(customer, products) {
@@ -18,18 +19,8 @@ export default class ShoppingCart {
 
     checkout = () => {
 
-        var totalPrice = new DiscountService(this.products).applyDiscounts();
-        let loyaltyPointsEarned = 0;
-
-        this.products.forEach(product => {
-            if (product.code.startsWith("DIS_10")) {
-                loyaltyPointsEarned += product.price / 10;
-            } else if (product.code.startsWith("DIS_15")) {
-                loyaltyPointsEarned += product.price / 15;
-            } else {
-                loyaltyPointsEarned += product.price / 5;
-            }
-        });
+        let totalPrice = new DiscountService(this.products).applyDiscounts();
+        let loyaltyPointsEarned = new LoyaltyPointsService(this.products).applyLoyaltyPointsService();
 
         return new Order(totalPrice, loyaltyPointsEarned);
     };
