@@ -6,5 +6,18 @@ export default class Customer {
         this.orders = [];
         this.shoppingCart = new ShoppingCart(this, []);
 
+    };
+
+    addToCart = (product) => {
+       this.shoppingCart.addProduct(product);
     }
+
+    removeFromCart = (product) => {
+        this.shoppingCart.removeProduct(product);
+    }
+
+    checkoutCart = () => {
+        let order = this.shoppingCart.checkout();
+        this.orders.push(order);
+    } 
 };

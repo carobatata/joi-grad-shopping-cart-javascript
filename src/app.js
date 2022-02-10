@@ -1,4 +1,3 @@
-import ShoppingCart from "./model/ShoppingCart.js";
 import Product from "./model/Product.js";
 import Customer from "./model/Customer.js";
 
@@ -9,12 +8,14 @@ const products = [
 
 const customer = new Customer("John Doe");
 
-const shoppingCart = new ShoppingCart(customer, products);
+customer.addToCart(products[0]);
+customer.addToCart(products[1]);
+
 const productThree = new Product(30.0, "PRODUCT3", "Product 3");
-shoppingCart.addProduct(productThree);
+customer.addToCart(productThree);
 
-console.log(shoppingCart.displaySummary())
+console.log(customer.shoppingCart.displaySummary())
 
-const order = shoppingCart.checkout();
+customer.checkoutCart();
 
-console.log(order.displaySummary())
+console.log(customer.orders[0].displaySummary())
